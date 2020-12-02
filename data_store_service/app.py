@@ -43,11 +43,11 @@ def send_to_db():
     
 # when a user hits this endpoint the server will respond with available data in the mongoDB database
 
-# @app.route('/api/v1/fetch')
-# def queryDB():
-#     cougar_profiles = mongo.db['cougar_profiles']
-#     results = cougar_profiles.find({})
-#     return jsonify({"success": json.loads(dumps(results))})
+@app.route('/api/v1/fetch')
+def queryDB():
+    cougar_profiles = mongo.db['cougar_profiles']
+    results = cougar_profiles.find({})
+    return jsonify({"success": json.loads(dumps(results))})
 
 
 
