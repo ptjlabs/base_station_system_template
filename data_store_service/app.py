@@ -1,27 +1,35 @@
 from flask import Flask, jsonify, request
 from flask_restful import Resource, Api
+from configparser import ConfigParser
 from flask_pymongo import PyMongo
 from bson.json_util import dumps # Takes the bson data from the database and convert to json
 import json
-import urllib.parse
 import os
 
+
+parser = ConfigParser()
+parser.read('dev.ini')
+ 
 app = Flask(__name__)
 
-password = urllib.parse.quote_plus('yLYfckRV0zleZm7Z')
-username = urllib.parse.quote_plus('prezlo')
+password = parser.get('MONGO_CREDS','password')
+username = parser.get('MONGO_CREDS','username')
+mongo_uri = parser.get('MONGO_CREDS','MONGO_URI')
+db_name = parser.get('MONGO_CREDS','db_name')
 # print(password)
 
 
 
-app.config['MONGO_DBNAME'] = 'campusDB'
-app.config['MONGO_URI'] = f'mongodb+srv://{username}:{password}@cougar-data-den-otljj.mongodb.net/campusDB?retryWrites=true&w=majority'
+
+app.config['MONGO_DBNAME'] = db_name
+app.config['MONGO_URI'] = f'mongodb+srv://{username}:{password}@{mongo_uri}'
 mongo = PyMongo(app)
 
 
 @app.route('/')
-def add():
-    return "Living Campus API v1 "
+def home():
+    
+    return "Living Campus API v2 "
 
 # This route allows iOS applications to post its form content to MongoDB Atlas
 @app.route('/api/v1/submit', methods=['POST'])
