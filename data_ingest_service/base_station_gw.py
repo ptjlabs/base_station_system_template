@@ -12,19 +12,12 @@ import uuid
 #     print("message qos=",message.qos)
 #     print("message retain flag=",message.retain)
 
-
+time.
 def main():
-    client_name  = f"starfox:{uuid.uuid4()}"
-    print(f"Hello {client_name}")
-    # client = mqtt.Client(client_name)
-    # while True:
+    print(f"PTJLabs A:12 Series Base Station")
+            
 
-    #     client.on_message = on_message
-    #     client.connect(host="base_station_mqtt-broker_1",port=1883,keepalive=60)
-    #     client.loop_start()
 
-    #     client.subscribe("cot/research")
-    #     time.sleep(2)
 
 
 
