@@ -7,23 +7,30 @@ import json
 import os
 
 
-parser = ConfigParser()
-parser.read('dev.ini')
- 
+
 app = Flask(__name__)
+parser = ConfigParser()
+password = ""
+username = ""
+mongo_uri = ""
+db_name = ""
 
-password = parser.get('MONGO_CREDS','password')
-username = parser.get('MONGO_CREDS','username')
-mongo_uri = parser.get('MONGO_CREDS','MONGO_URI')
-db_name = parser.get('MONGO_CREDS','db_name')
-# print(password)
-
+#configPath = r'C:\Users\preston.turner\Desktop\base_station\data_store_service\dev.ini'
+configPath = r'.\data_store_service\dev.ini'
+parser.read(configPath)
+    
+password = parser.get('MONGO','password')
+username = parser.get('MONGO','username')
+mongo_uri = parser.get('MONGO','mongouri')
+db_name = parser.get('MONGO','dbname')
 
 
 
 app.config['MONGO_DBNAME'] = db_name
 app.config['MONGO_URI'] = f'mongodb+srv://{username}:{password}@{mongo_uri}'
 mongo = PyMongo(app)
+
+
 
 
 @app.route('/')
