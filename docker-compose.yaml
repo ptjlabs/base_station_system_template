@@ -11,10 +11,7 @@ services:
     ports:
       - 1883:1883
       
-  
-  data-store-agent:
-    build: ./data_ingest_service
-    ports:
-      - 8080:80
+
+
       
   
